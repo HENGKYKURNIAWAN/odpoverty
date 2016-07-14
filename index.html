@@ -5,18 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    <title>Vacant Units for Rent</title>
+    <title>Data Poverty</title>
+
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/cosmo/bootstrap.min.css" rel="stylesheet" integrity="sha384-OiWEn8WwtH+084y4yW2YhhH6z/qTSecHZuk/eiWtnvLtU+Z8lpDsmhOKkex6YARr" crossorigin="anonymous">
+
     <link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto:700, 400' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Dosis:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script src="./data/nvd3.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+
+    <script src="js/script.js"></script>
+
+    <!-- <script src="js/bootstrap.min.js"></script> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.2/d3.min.js" charset="utf-8"></script>
+    <script src="js/nvd3.js"></script>
+     
+
+
 
     <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="data/nvd3.css" type="text/css">
+    <link rel="stylesheet" href="css/nvd3.css" type="text/css">
   </head>
 
   <body>
@@ -29,7 +45,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Vacant Units for Rent, NYC</a>
+          <a class="navbar-brand" href="#">NYC Data Poverty</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -72,43 +88,19 @@
            
  -->
             <div id="side">
-              <h3>44.96%</h3>
-              <h4>of Unoccupied Units Available for Rent in New York City - 2015.</h4>
+              <h3>-</h3>
+              <h4>of representation score on NYC Open Data Portal</h4>
             </div>
 
             
             <h6><i class="fa fa-square" style="color: #4daf4a;"></i>
-            &nbsp;Median Monthly Income ($)<br>
-            <i class="fa fa-square" style="color: #377eb8;"></i>&nbsp;&nbsp;Median Monthly Rent ($)<br>
-            <i class="fa fa-square" style="color: #e41a1c;"></i>&nbsp;&nbsp;30% Of A Household's Income ($)<br></h6>
+            &nbsp;STD_score<br>
+            <i class="fa fa-square" style="color: #377eb8;"></i>&nbsp;&nbsp;MMX_score<br></h6>
             
             <!-- <div id="chartContainer"> -->
               <div id="chart">
                 <svg style="width: 100%;"></svg>
               </div>
-
-            *By general rule-of-thumb, housing costs should not exceed 30 percent of a household's total income. Compare Blue (Rent) and Red (30% of Income).
-
-            <!-- </div> -->
-
-              <!-- <div id="chart2">
-                <svg></svg>
-              </div> -->
-
-              <div id="line">
-                <h2><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp;DOWNLOAD</h2>
-
-                <a href="data/download/rentalvacancy.geojson" id="alink"><button type="button" class="btn btn-primary">GEOJSON</a></button>
-                <a href="data/download/rentalvacancy.csv" id="alink"><button type="button" class="btn btn-primary">CSV</a></button>
-                <a href="data/download/rentalvacancyshp.zip" id="alink"><button type="button" class="btn btn-primary">SHAPEFILE</a></button>
-              </div>
-                      
-              <center><div id="line">
-                <a href="https://github.com/livenlulu/rentalvacancy" target="_blank"><i class="fa fa-github"></i></a>&nbsp;&nbsp;&nbsp;
-                <a href="https://twitter.com/livenlulu" target="_blank"><i class="fa fa-twitter"></i></a>&nbsp;&nbsp;&nbsp;
-                <a href="https://www.facebook.com/lu6ky" target="_blank"><i class="fa fa-facebook"></i></a>
-              </div>
-              </center>
 
               <br>
           </div>
@@ -120,22 +112,19 @@
     </div>
 
       <div id="infoWindow" >
-        <h5>RENTAL VACANCY RATE <br>AT BLOCK LEVEL</h5>
+        <h5>REPRESENTATION SCORE AT COMMUNITY DISTRICT</h5>
           <ul>
             <li class="graph">
               <div id="colors">
-                <div class="quartile" style="background-color:#FFEDA0"></div>
-                <div class="quartile" style="background-color:#FED976"></div>
-                <div class="quartile" style="background-color:#FEB24C"></div>
-                <div class="quartile" style="background-color:#FD8D3C"></div>
-                <div class="quartile" style="background-color:#FC4E2A"></div>
-                <div class="quartile" style="background-color:#E31A1C"></div>
-                <div class="quartile" style="background-color:#BD0026"></div>
-                <div class="quartile" style="background-color:#0000cc"></div>
+                <div class="quartile" style="background-color:#FFFFCC"></div>
+                <div class="quartile" style="background-color:#c2e699"></div>
+                <div class="quartile" style="background-color:#78c679"></div>
+                <div class="quartile" style="background-color:#31a354"></div>
+                <div class="quartile" style="background-color:#006837"></div>
               </div>
             </li>
-            <li class="min">20%</li>
-            <li class="max">100%</li><br><br>
+            <li class="min">0</li>
+            <li class="max">100</li><br><br>
           </ul>
       </div>
 
@@ -186,7 +175,7 @@
     <!-- <script src="js/bootstrap.min.js"></script> -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.2/d3.min.js" charset="utf-8"></script>
-    <script src="data/nvd3.js"></script>
+    <script src="js/nvd3.js"></script>
      
   </body>
 </html>

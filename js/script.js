@@ -1,4 +1,4 @@
-var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png',{
+var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',{
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
 });
 
@@ -22,7 +22,7 @@ var statenisland = [40.571719,-74.148788];
 var panOptions = {
     animate: true,
     duration: 2
- 	}
+  }
 
       $(".myButton").click(function() {
       if($(this).attr('id') == 'one' ) {
@@ -68,35 +68,32 @@ var panOptions = {
 
   var geojson;
 
-  $.getJSON('data/vac.geojson', function(data) {
+  $.getJSON('data/merged1407.geojson', function(data) {
     geojson = L.geoJson(data, {
-    	style: style,
-    	onEachFeature: onEachFeature
+      style: style,
+      onEachFeature: onEachFeature
     }).addTo(map);
     updateChart(data.features[currid].properties)
   });
 
 
   function getColor(d) {
-    return d > 90 ? '#0000cc' :
-           d > 80  ? '#BD0026' :
-           d > 60  ? '#E31A1C' :
-           d > 50  ? '#FC4E2A' :
-           d > 40  ? '#FD8D3C' :
-           d > 30  ? '#FEB24C' :
-           d > 20  ? '#FED976' :
-                     '#FFEDA0' ;
+    return d > 0.8  ? '#006837' :
+           d > 0.6  ? '#31A354' :
+           d > 0.4  ? '#78C679' :
+           d > 0.2  ? '#c2e699' :
+                     '#FFFFCC' ;
   }
 
 
   function style(feature) {
     return {
-        fillColor: getColor(feature.properties.VALUE2),
-        weight: .2,
+        fillColor: getColor(feature.properties.mmx_rep),
+        weight: .6,
         opacity: 1,
-        color: 'white',
+        color: '#000000',
         dashArray: '0',
-        fillOpacity: 0.7
+        fillOpacity: 1.0
     };
   }
 
@@ -121,8 +118,8 @@ var panOptions = {
     updateChart(e.target.feature.properties);
 
     // console.log(layer.feature.properties.VALUE2);
-    $('#side').html('<h3>' + layer.feature.properties.VALUE2 + '%' + '</h3>' + '<h4>' + 'of Unoccupied Units Available for Rent in this Region - 2015.' + '</h4>');
-  	}
+    $('#side').html('<h3>' + (layer.feature.properties.mmx_rep * 100).toFixed() + '</h3>' + '<h4>' + 'of representation score on NYC Open Data Portal' + '</h4>');
+    }
 
   function resetHighlight(e) {
     geojson.resetStyle(e.target);
@@ -191,17 +188,13 @@ function updateChart(f){
   rentData[0].values =
     [
         { 
-          "label" : "Median Monthly Income" , 
-          "value" : f.median_income / 12
+          "label" : "STD" , 
+          "value" : f.std_rep
         } , 
         { 
-          "label" : "Median Monthly Rent" , 
-          "value" : f.median_rent 
-        } , 
-        { 
-          "label" : "30% Of A Household's Total Income" , 
-          "value" : f.median_income /12 * .3
-        } 
+          "label" : "MMX" , 
+          "value" : f.mmx_rep 
+        }
       ]
     d3.select('#chart svg')
     .datum(rentData)
@@ -211,27 +204,7 @@ function updateChart(f){
 }
 
 
-//bulletchart
-// nv.addGraph(function() {  
-//   var chart2 = nv.models.bulletChart();
 
-//   d3.select('#chart2 svg')
-//       .datum(exampleData())
-//       .transition().duration(1000)
-//       .call(chart2);
-
-//   return chart2;
-// });
-
-
-// function exampleData() {
-//   return {
-//     "title":"Revenue",    //Label the bullet chart
-//     "subtitle":"US$",   //sub-label for bullet chart
-//     "ranges":[150,225,300],  //Minimum, mean and maximum values.
-//     "measures":[220],    //Value representing current measurement (the thick blue line in the example)
-//     "markers":[250]      //Place a marker on the chart (the white triangle marker)
-//   };
-// }
+////SPIDER CHART
 
 
