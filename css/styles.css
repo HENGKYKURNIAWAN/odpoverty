@@ -37,7 +37,11 @@
     	font-size: 40px;
     	font-weight: 700;
     	margin-top: 0px;
+<<<<<<< HEAD
         /*color: #e8e119;*/
+=======
+        color: #e8e119;
+>>>>>>> 1b4165a29718e5ad5cadd787d699111fe499fb1b
     }
 
     h4 {
@@ -109,6 +113,7 @@
 	    line-height: 15px;
     }
 
+<<<<<<< HEAD
     #repscore {
         font-size: 4em;
         font-weight: bold;
@@ -120,6 +125,12 @@
         color: #FFF;
         background: #000;
         margin: 0 auto;
+=======
+    #side {
+        background-color: #242426;
+        height:100%;
+       /* width: 100%;*/
+>>>>>>> 1b4165a29718e5ad5cadd787d699111fe499fb1b
     }
 
     #line {
@@ -198,8 +209,15 @@
     }
 
     .row {
+<<<<<<< HEAD
         margin-left: 0px;
         margin-right: 0px;
+=======
+        background-color: #242426;
+        margin-left: 0px;
+        margin-right: 0px;
+        color: white;
+>>>>>>> 1b4165a29718e5ad5cadd787d699111fe499fb1b
         height: 100%;
         width:auto;
     }
@@ -214,7 +232,11 @@
     }
 
     #infoWindow {
+<<<<<<< HEAD
         background-color: #FFFFFF;
+=======
+        background: #FFFFFF;
+>>>>>>> 1b4165a29718e5ad5cadd787d699111fe499fb1b
         padding: 10px;
         margin-top: 0px;
         margin-left: 30px;
